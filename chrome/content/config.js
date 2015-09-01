@@ -7,7 +7,13 @@
   exports.PCPrefs = {
     branch: Components.classes['@mozilla.org/preferences-service;1'].getService(Components.interfaces.nsIPrefService).getBranch('extensions.cperapera.'),
     getString: function(key) {
-      return this.branch.getComplexValue(key, Components.interfaces.nsISupportsString).data;
+      //return this.branch.getComplexValue(key, Components.interfaces.nsISupportsString).data;
+      if (this.branch.getPrefType(key)) {
+        return this.branch.getComplexValue(key, Components.interfaces.nsISupportsString).data;
+      }
+      else {
+        return '';
+      }
     },
     setString: function(key, value) {
       var s;

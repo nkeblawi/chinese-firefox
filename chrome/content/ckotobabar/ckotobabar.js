@@ -68,10 +68,11 @@
     },
     removeAllEntries: function() {
       var lbox, _i, _len, _ref, _results;
-      _ref = this.E("entriesListbox").childNodes;
+      _ref = Array.from(this.E("entriesListbox").childNodes);
+      var _refCopy = _ref.slice(0);
       _results = [];
-      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-        lbox = _ref[_i];
+      for (_i = 0, _len = _refCopy.length; _i < _len; _i++) {
+        lbox = _refCopy[_i];
         if (lbox.nodeName === "listitem") {
           _results.push(this.E("entriesListbox").removeChild(lbox));
         }
@@ -88,15 +89,17 @@
         params = {
           out: null
         };
-        window.openDialog("chrome:#cperapera/content/ckotobabar/yesnodialog.xul", "", "chrome, dialog, modal, centerscreen, resizable=no", params).focus();
+        window.openDialog("chrome://cperapera/content/ckotobabar/yesnodialog.xul", "", "chrome, dialog, modal, centerscreen, resizable=no", params).focus();
+        //window.openDialog("chrome:/content/ckotobabar/yesnodialog.xul", "", "chrome, dialog, modal, centerscreen, resizable=no", params).focus();
         if (!(params.out != null)) {
           return;
         }
       }
-      _ref = this.E("entriesListbox").childNodes;
+      _ref = Array.from(this.E("entriesListbox").childNodes);
+      var _refCopy = _ref.slice(0); // make copy of childNode array, because the previous line assigns the array by reference - not by value
       _results = [];
-      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-        lbox = _ref[_i];
+      for (_i = 0, _len = _refCopy.length; _i < _len; _i++) {
+        lbox = _refCopy[_i];
         if ((lbox.nodeName === "listitem") && (lbox.firstChild.firstChild.checked === true)) {
           _results.push(this.E("entriesListbox").removeChild(lbox));
         } else {
@@ -189,11 +192,14 @@
       _ref = this.E("entriesListbox").childNodes;
       for (_i = 0, _len = _ref.length; _i < _len; _i++) {
         lbox = _ref[_i];
-        if (listBoxChilds[ii].nodeName !== "listitem") {
+        //if (listBoxChilds[ii].nodeName !== "listitem") {
+        if (lbox.nodeName !== "listitem") {
           continue;
         }
-        cbox = listBoxChilds[ii].firstChild.firstChild;
-        if (cbox.checked === true) {
+        //cbox = listBoxChilds[ii].firstChild.firstChild;
+        //if (cbox.checked === true) {
+        litem = lbox.firstChild.firstChild;
+        if (litem.checked === true) {
           return true;
         }
       }
@@ -248,6 +254,10 @@
     exportToFile: function(delim, filenameString, savingUserEntries) {
       var charset, filename, fos, fp, isEdictFormat, lbox, litems, meaning, nsIFilePicker, os, outputEntry, prefs, reading, rv, strOut, t, word, _i, _len, _ref;
       prefs = Components.classes['@mozilla.org/preferences-service;1'].getService(Components.interfaces.nsIPrefService).getBranch('extensions.cperapera.');
+      
+      // added this line of code to ensure savingUserEntries is non-null
+      savingUserEntries = this.isAtLeastOneChecked();
+
       try {
         if ((!(savingUserEntries != null)) || (!savingUserEntries) && (!this.isAtLeastOneChecked())) {
           alert('No entries selected to export.');
@@ -293,11 +303,12 @@
         _ref = this.E("entriesListbox").childNodes;
         for (_i = 0, _len = _ref.length; _i < _len; _i++) {
           lbox = _ref[_i];
-          if (lbox !== "listitem") {
+          if (lbox.nodeName !== "listitem") {
             continue;
           }
           litems = lbox.childNodes;
-          outputEntry = (!(savingUserEntries != null)) || (savingUserEntries === false) ? litems[0].firstChild.checked : true;
+          //outputEntry = (!(savingUserEntries != null)) || (savingUserEntries === false) ? litems[0].firstChild.checked : true;
+          outputEntry = litems[0].firstChild.checked;
           if (outputEntry) {
             t = litems[1];
             word = litems[1].getAttribute("label");
@@ -338,7 +349,7 @@
         params = {
           out: null
         };
-        window.openDialog("chrome:#cperapera/content/ckotobabar/exportdialog.xul", "", "chrome, dialog, modal,centerscreen, resizable=no", params).focus();
+        window.openDialog("chrome://cperapera/content/ckotobabar/exportdialog.xul", "", "chrome, dialog, modal,centerscreen, resizable=no", params).focus();
         if (!(params.out != null)) {
           return;
         } else {

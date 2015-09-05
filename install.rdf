@@ -5,7 +5,7 @@
 		<em:type>2</em:type>
 		<em:id>chineseperakun@gmail.com</em:id>
 		<em:name>Perapera Chinese</em:name>
-		<em:version>12.3.0</em:version>
+		<em:version>12.4.0</em:version>
 		<em:description>Chinese Pop-up Dictionary</em:description>
 		<em:optionsURL>chrome://cperapera/content/options.xul</em:optionsURL>
 		<em:iconURL>chrome://cperapera/skin/star32.png</em:iconURL>

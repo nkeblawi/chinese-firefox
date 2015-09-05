@@ -1,0 +1,27 @@
+Manifest-Version: 1.0
+
+Name: install.rdf
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: KU33Gf6/4LwEo2qmJFQ5Ug==
+SHA1-Digest: w9mWIMudypCMcHJmZ1Ko418kRAI=
+
+Name: chrome.manifest
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: vVJ+l9RkPpCcut04BCO6VA==
+SHA1-Digest: 3UOqRUdfqCQidhmzneH/K4M8410=
+
+Name: dict.sqlite
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: YF1/rZ+SAXzCLmgtCtmbhQ==
+SHA1-Digest: Cpa6fKKAmsHDMpPabBeM4qlnr0A=
+
+Name: chrome/cperapera.jar
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: Y8LiyCOI92vaUWWThLtMZg==
+SHA1-Digest: y/FMnNvwrTYu2cB5oc9WQ95Akck=
+
+Name: defaults/preferences/cperapera.js
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: Rr0XJLSy2Q0Wybg1DmOu+g==
+SHA1-Digest: RgrZYPVIDzSwydqzB6WICy+YXnk=
+
